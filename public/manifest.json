@@ -1,0 +1,19 @@
+{
+  "name": "Rituel Restaurant & Lounge — Agadir",
+  "short_name": "Rituel Agadir",
+  "description": "Restaurant chic et lounge premium au cœur d'Agadir. Cuisine gastronomique, cocktails et ambiance raffinée.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#D4AF37",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/logoR.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "restaurant"]
+}
