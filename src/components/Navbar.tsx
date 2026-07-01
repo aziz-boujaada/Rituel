@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-scroll';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import logo from '@/assets/logoR.png';
+import { useThemeLogo } from '../hooks/useThemeLogo';
 const navItems = [
   { name: 'Accueil', to: 'home' },
   { name: 'Concept', to: 'about' },
@@ -14,6 +14,7 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const logoSrc = useThemeLogo();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,10 +39,10 @@ export default function Navbar() {
             className="cursor-pointer"
           >
             <img 
-              src={logo}
+              src={logoSrc}
               alt="Rituel Agadir Logo" 
               loading='lazy'
-              className="h-16 md:h-20 w-full md:w-36   object-contain  rounded-lg shadow-s dark:shadow-none"
+              className="h-12 w-auto md:h-20 md:w-36 object-contain rounded-lg shadow-sm dark:shadow-none transition-all duration-300"
             />
           </Link>
 

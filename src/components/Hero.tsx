@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-scroll';
 import { useThemeImage } from '../hooks/useThemeImage';
-import logo from '@/assets/logoR.png';
 
 export default function Hero() {
   const imgSrc = useThemeImage("https://res.cloudinary.com/dqhuqkeq2/image/upload/v1777018368/PAGE_DE_GARDE_zeqcbp.jpg");
@@ -45,7 +44,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="text-gray-200 font-sans tracking-wide mb-10 max-w-2xl mx-auto text-sm md:text-base drop-shadow-md"
+          className="text-white font-sans tracking-wide mb-10 max-w-2xl mx-auto text-sm md:text-base drop-shadow-md"
         >
           Découvrez une cuisine d'exception dans un cadre élégant au cœur d'Agadir. 
           L'alliance parfaite entre tradition et modernité.

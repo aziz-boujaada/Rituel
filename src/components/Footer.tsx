@@ -1,8 +1,10 @@
 import { Instagram, Facebook, Phone } from 'lucide-react';
 import { Link } from 'react-scroll';
-import logo from '@/assets/logoR.png';
+import { useThemeLogo } from '../hooks/useThemeLogo';
 
 export default function Footer() {
+  const logoSrc = useThemeLogo();
+
   return (
     <footer className="bg-gray-50 dark:bg-black pt-20 pb-10 border-t border-gray-200 dark:border-white/10 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -10,9 +12,9 @@ export default function Footer() {
         {/* Brand */}
         <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
           <img 
-            src={logo}
+            src={logoSrc}
             alt="Rituel Agadir Logo" 
-            className="h-20 mb-6 rounded-md opacity-90 shadow-sm dark:shadow-none"
+            className="h-16 md:h-20 w-auto mb-6 rounded-md opacity-90 shadow-sm dark:shadow-none transition-all duration-300"
             loading="lazy"
             decoding="async"
             width={80}
