@@ -1,8 +1,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import SplashScreen from './SplashScreen';
 
-const SPLASH_EXIT_DURATION_MS = 3000;
-const SPLASH_MAX_VISIBLE_MS = 8000;
+const SPLASH_EXIT_DURATION_MS = 300;
+const SPLASH_MAX_VISIBLE_MS = 1000;
 
 type SplashPhase = 'hidden' | 'visible' | 'exiting';
 
@@ -18,6 +18,28 @@ export default function SplashGate({ children }: SplashGateProps) {
 
     return document.readyState === 'complete' ? 'hidden' : 'visible';
   });
+
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+    return window.innerWidth < 768;
+  });
+
+  useEffect(() => {
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        setIsMobile(window.innerWidth < 768);
+      }, 150);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimeout);
+    };
+  }, []);
 
   useEffect(() => {
     if (phase === 'hidden') {
@@ -68,7 +90,7 @@ export default function SplashGate({ children }: SplashGateProps) {
   return (
     <>
       {children}
-      {phase !== 'hidden' && <SplashScreen isExiting={phase === 'exiting'} />}
+      {phase !== 'hidden' && <SplashScreen isExiting={phase === 'exiting'} isMobile={isMobile} />}
     </>
   );
 }

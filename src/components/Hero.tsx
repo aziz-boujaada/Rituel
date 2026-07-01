@@ -9,13 +9,12 @@ export default function Hero() {
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Parallax effect */}
       <motion.div 
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 will-change-transform"
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/90 z-10" />
-        <link rel="preload" as="image" href={imgSrc} fetchPriority="high" />
         <img
           src={imgSrc}
           alt="Rituel Agadir Hero"
@@ -30,30 +29,37 @@ export default function Hero() {
 
       <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
 
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="font-serif text-4xl md:text-6xl lg:text-8xl font-bold mb-4 leading-tight text-white drop-shadow-md"
+          transition={{ staggerChildren: 0.2, delayChildren: 0.3 }}
+          className="flex flex-col gap-6"
         >
-          Rituel Agadir <br/>
-          <span className="text-gold-500 italic font-light text-3xl md:text-5xl drop-shadow-lg">L'art de la cuisine</span>
-        </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="font-serif text-4xl md:text-6xl lg:text-8xl font-bold mb-4 leading-tight text-white drop-shadow-md"
+          >
+            Rituel Agadir <br/>
+            <span className="text-gold-500 italic font-light text-3xl md:text-5xl drop-shadow-lg">L'art de la cuisine</span>
+          </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="text-white font-sans tracking-wide mb-10 max-w-2xl mx-auto text-sm md:text-base drop-shadow-md"
-        >
-          Découvrez une cuisine d'exception dans un cadre élégant au cœur d'Agadir. 
-          L'alliance parfaite entre tradition et modernité.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-white font-sans tracking-wide mb-10 max-w-2xl mx-auto text-sm md:text-base drop-shadow-md"
+          >
+            Découvrez une cuisine d'exception dans un cadre élégant au cœur d'Agadir. 
+            L'alliance parfaite entre tradition et modernité.
+          </motion.p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center"
         >
           <Link
@@ -76,7 +82,7 @@ export default function Hero() {
       </div>
       
       <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 will-change-transform"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >

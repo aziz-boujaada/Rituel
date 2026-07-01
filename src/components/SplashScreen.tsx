@@ -3,45 +3,39 @@ import { useThemeLogo } from '../hooks/useThemeLogo';
 
 interface SplashScreenProps {
   isExiting: boolean;
+  isMobile: boolean;
 }
 
-export default function SplashScreen({ isExiting }: SplashScreenProps) {
+export default function SplashScreen({ isExiting, isMobile }: SplashScreenProps) {
   const prefersReducedMotion = useReducedMotion();
   const logoSrc = useThemeLogo();
-
-  const logoAnimation = prefersReducedMotion
-    ? { opacity: 1, scale: 1 }
-    : { opacity: isExiting ? 0 : 1, scale: isExiting ? 1 : 1 };
-
-  const lineAnimation = prefersReducedMotion
-    ? { opacity: 1, scaleX: 1 }
-    : { opacity: isExiting ? 0 : 1, scaleX: isExiting ? 1 : 1 };
 
   return (
     <motion.div
       className="fixed inset-0 z-[200] flex min-h-[100dvh] items-center justify-center bg-white dark:bg-black"
       initial={{ opacity: 1 }}
-      animate={{ opacity: isExiting ? 0 : 1 }}
-      transition={{ duration: prefersReducedMotion ? 0 : 0.3, ease: 'easeOut' }}
+      animate={{ opacity: prefersReducedMotion || isExiting ? 0 : 1 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       style={{ willChange: 'opacity' }}
       aria-hidden="true"
+      onAnimationComplete={() => isExiting && !prefersReducedMotion}
     >
-      <div className="flex flex-col items-center justify-center gap-5 px-6 text-center">
+      <div className={`flex flex-col items-center justify-center px-6 text-center ${isMobile ? 'gap-4' : 'gap-5'}`}>
         <motion.img
           src={logoSrc}
           alt=""
-          initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
-          animate={logoAnimation}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: prefersReducedMotion ? 1 : 1, scale: 1 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: 'easeOut' }}
-          className="h-20 w-auto sm:h-24 md:h-28 object-contain will-change-transform"
+          className={`w-auto object-contain will-change-transform ${isMobile ? 'h-16' : 'h-20 sm:h-24 md:h-28'}`}
           width={160}
           height={160}
         />
 
         <motion.div
-          className="h-px w-20 sm:w-24 bg-gold-500 origin-left will-change-transform"
-          initial={prefersReducedMotion ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-          animate={lineAnimation}
+          className={`h-px bg-gold-500 origin-left will-change-transform ${isMobile ? 'w-16' : 'w-20 sm:w-24'}`}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: prefersReducedMotion ? 1 : 1 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: 'easeOut' }}
         />
       </div>

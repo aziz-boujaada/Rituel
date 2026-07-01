@@ -17,11 +17,18 @@ export default function Navbar() {
   const logoSrc = useThemeLogo();
 
   useEffect(() => {
+    let scrollTimeout: ReturnType<typeof setTimeout>;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setScrolled(window.scrollY > 50);
+      }, 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
 
   return (
